@@ -1,21 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Orders Screen</title>
+  <meta charset="UTF-8" />
+  <title>Drinks Menu</title>
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+    button {
+      padding: 10px 16px;
+      margin: 6px;
+      font-size: 16px;
+      background-color: #D49DC9;
+      border: 1px solid #b07aa6;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    button.selected {
+      background-color: #9b5c8a; /* darker */
+      color: white;
+    }
+  </style>
 </head>
+
 <body>
+  <h1>Drinks Menu</h1>
+  <p>Tap a drink to order</p>
 
-  <h1>Live Orders</h1>
-  <p>This updates automatically.</p>
+  <h2>Hot Drinks</h2>
+  <button data-item="Tea">Tea</button>
+  <button data-item="Coffee">Coffee</button>
+  <button data-item="Hot Chocolate">Hot Chocolate</button>
 
-  <div id="orders"></div>
+  <h2>Soft Drinks</h2>
+  <button data-item="Coke">Coke</button>
+  <button data-item="Diet Coke">Diet Coke</button>
+  <button data-item="Fanta">Fanta</button>
+  <button data-item="Water">Water</button>
 
-  <script src="app.js"></script>
-</body>
-</html>
+  <h2>Beers & Ciders</h2>
+  <button data-item="Guinness">Guinness</button>
+  <button data-item="Ghost Ship">Ghost Ship</button>
+  <button data-item="Old Speckled Hen">Old Speckled Hen</button>
+  <button data-item="Doom Bar">Doom Bar</button>
+  <button data-item="peroni">peroni</button>
+  <button data-item="birra moretti">birra moretti</button>
+  <button data-item="estrella damm">estrella damm</button>
+
+  <h2>wine & champagne</h2>
+  <button data-item="champagne">champagne</button>
+  <button data-item="prosseco">prosseco</button>
+
+  <h2><button data-item="sent!">send</button><h2>
+  <p>
+    <a href="./order.html">Order screen</a>
+  </p>
+
+  <script>
+    const ORDER_PAGE_URL = "./order.html";
+
+    document.querySelectorAll("button[data-item]").forEach(button => {
+      button.addEventListener("click", () => {
+
+        // remove selection from all buttons
+        document.querySelectorAll("button").forEach(b =>
+          b.classList.remove("selected")
+        );
+
+        // select this button
+        button.classList.add("selected");
+
+        const item = button.dataset.item;
+        const quantity = 1;
+
+        window.location.href =
+          `${ORDER_PAGE_URL}?item=${encodeURIComponent(item)}&quantity=${quantity}`;
+      });
+    });
+  <script>
