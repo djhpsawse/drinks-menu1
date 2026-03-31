@@ -4,41 +4,70 @@
   <meta charset="UTF-8">
   <title>Drinks Menu</title>
 </head>
+<script>
+  const FLOW_URL = "PASTE_POWER_AUTOMATE_HTTP_URL_HERE";
 
+  async function sendOrder(item) {
+    try {
+      await fetch(FLOW_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          item: item,
+          quantity: 1,
+          device: navigator.userAgent
+        })
+      });
+
+      alert("Order sent: " + item);
+    } catch (err) {
+      alert("Order failed");
+      console.error(err);
+    }
+  }
+
+  document.querySelectorAll("button[data-item]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      sendOrder(btn.dataset.item);
+    });
+  });
+</script>
 <body>
 
   <h1>Drinks Menu</h1>
   <p>Tap a drink to order</p>
 
   <h2>Hot Drinks</h2>
-  <button>Tea</button>
-  <button>Coffee</button>
-  <button>Hot Chocolate</button>
+  <button data-item="tea">Tea</button>
+  <button data-item="coffee">Coffee</button>
+  <button data-item="hot chocolate">Hot Chocolate</button>
 
   <h2>Soft Drinks</h2>
-  <button>Coke</button>
-  <button>Diet Coke</button>
-  <button>Fanta</button>
-  <button>Water</button>
+  <button data-item="coke">Coke</button>
+  <button data-item="diet coke">Diet Coke</button>
+  <button data-item="fanta">Fanta</button>
+  <button data-item="water">Water</button>
 
   <h2>Beers & Ciders</h2>
-  <button>Guinness</button>
-  <button>Ghost Ship</button>
-  <button>Old Speckled Hen</button>
-  <button>Doom Bar</button>
-  <button>Peroni</button>
-  <button>Birra Moretti</button>
-  <button>Estrella Damm</button>
-  <button>Boom Doggle</button>
-  <button>Congerlo</button>
+  <button data-item="guinness">Guinness</button>
+  <button data-item="ghost ship">Ghost Ship</button>
+  <button data-item="old speckled hen"=>Old Speckled Hen</button>
+  <button data-item="doom bar">Doom Bar</button>
+  <button data-item="peroni">Peroni</button>
+  <button data-item="Birra Moretti">Birra Moretti</button>
+  <button data-item="Estrella Damm">Estrella Damm</button>
+  <button data-item="Boom Doggle">Boom Doggle</button>
+  <button data-item="Congerlo">Congerlo</button>
 
   <h2>Spirits & Cocktails</h2>
-  <button>Vodka + Diet Coke</button>
-  <button>Gin + Tonic</button>
-  <button>Smirnoff Ice</button>
+  <button data-item="Vodka + Diet Coke">Vodka + Diet Coke</button>
+  <button data-item="Gin + Tonic">Gin + Tonic</button>
+  <button data-item="Smirnoff Ice">Smirnoff Ice</button>
 
   <h2>Wine & Champagne</h2>
-  <button>Champagne</button>
+  <button data-item="Champagne">Champagne</button>
+  <button data-item="prosseco">prosseco</button>
 
 </body>
+<a href="https://www.djhpsawse.github.io/drinks-menu1/order.html">Order screen</a>
 </html>
